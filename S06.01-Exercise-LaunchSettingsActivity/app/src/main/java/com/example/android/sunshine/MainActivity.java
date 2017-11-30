@@ -339,18 +339,18 @@ public class MainActivity extends AppCompatActivity implements
             invalidateData();
             getSupportLoaderManager().restartLoader(FORECAST_LOADER_ID, null, this);
             return true;
-        }
-
-        if (id == R.id.action_map) {
+        } else if (id == R.id.action_map) {
             openLocationInMap();
+            return true;
+        } else if (id == R.id.action_settings) {
+            Intent startSettingsActivityIntent = new Intent(this, SettingsActivity.class);
+            startActivity(startSettingsActivityIntent);
             return true;
         }
 
-        // TODO (1) Add new Activity called SettingsActivity using Android Studio wizard
-        // Do step 2 in SettingsActivity
-        // TODO (2) Set setDisplayHomeAsUpEnabled to true on the support ActionBar
+        // COMPLETED (1) Add new Activity called SettingsActivity using Android Studio wizard
 
-        // TODO (6) Launch SettingsActivity when the Settings option is clicked
+        // COMPLETED (6) Launch SettingsActivity when the Settings option is clicked
 
         return super.onOptionsItemSelected(item);
     }
