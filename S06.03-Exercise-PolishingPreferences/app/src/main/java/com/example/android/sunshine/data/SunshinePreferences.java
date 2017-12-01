@@ -16,8 +16,16 @@
 package com.example.android.sunshine.data;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.support.v7.preference.PreferenceManager;
+import android.util.Log;
+
+import com.example.android.sunshine.R;
 
 public class SunshinePreferences {
+
+    private static final String TAG = SunshinePreferences.class.getSimpleName();
 
     /*
      * Human readable location string, provided by the API.  Because for styling,
@@ -52,7 +60,7 @@ public class SunshinePreferences {
      * @param lon      The longitude of the city
      */
     static public void setLocationDetails(Context c, String cityName, double lat, double lon) {
-        /** This will be implemented in a future lesson **/
+        /* This will be implemented in a future lesson */
     }
 
     /**
@@ -65,7 +73,7 @@ public class SunshinePreferences {
      * @param lon             The longitude of the city
      */
     static public void setLocation(Context c, String locationSetting, double lat, double lon) {
-        /** This will be implemented in a future lesson **/
+        /* This will be implemented in a future lesson */
     }
 
     /**
@@ -74,7 +82,7 @@ public class SunshinePreferences {
      * @param c Context used to get the SharedPreferences
      */
     static public void resetLocationCoordinates(Context c) {
-        /** This will be implemented in a future lesson **/
+        /* This will be implemented in a future lesson */
     }
 
     /**
@@ -87,9 +95,17 @@ public class SunshinePreferences {
      * "94043,USA" if SharedPreferences have not been implemented yet.
      */
     public static String getPreferredWeatherLocation(Context context) {
-        // TODO (1) Return the user's preferred location
-        /** This will be implemented in a future lesson **/
-        return getDefaultWeatherLocation();
+        // COMPLETED (1) Return the user's preferred location
+        Resources resources = context.getResources();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+
+        String prefLocation = sharedPreferences.getString(resources.getString(R.string.pref_location_key),
+                resources.getString(R.string.pref_location_default));
+
+        Log.d(TAG, "Preferred location :" + prefLocation);
+
+        return sharedPreferences.getString(resources.getString(R.string.pref_location_key),
+                resources.getString(R.string.pref_location_default));
     }
 
     /**
@@ -100,9 +116,15 @@ public class SunshinePreferences {
      * @return true If metric display should be used
      */
     public static boolean isMetric(Context context) {
-        // TODO (2) Return true if the user's preference for units is metric, false otherwise
-        /** This will be implemented in a future lesson **/
-        return true;
+        // COMPLETED (2) Return true if the user's preference for units is metric, false otherwise
+        Resources resources = context.getResources();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+
+        String units = sharedPreferences.getString(resources.getString(R.string.pref_units_key), resources.getString(R.string.pref_units_metric));
+
+        Log.d(TAG, "is Metric :" + units.equals(resources.getString(R.string.pref_units_metric)));
+
+        return units.equals(resources.getString(R.string.pref_units_metric));
     }
 
     /**
@@ -125,17 +147,17 @@ public class SunshinePreferences {
      * @return true if lat/long are set
      */
     public static boolean isLocationLatLonAvailable(Context context) {
-        /** This will be implemented in a future lesson **/
+        /* This will be implemented in a future lesson */
         return false;
     }
 
     private static String getDefaultWeatherLocation() {
-        /** This will be implemented in a future lesson **/
+        /* This will be implemented in a future lesson */
         return DEFAULT_WEATHER_LOCATION;
     }
 
     public static double[] getDefaultWeatherCoordinates() {
-        /** This will be implemented in a future lesson **/
+        /* This will be implemented in a future lesson */
         return DEFAULT_WEATHER_COORDINATES;
     }
 }
